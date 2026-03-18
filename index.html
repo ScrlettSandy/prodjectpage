@@ -1,23 +1,390 @@
 <!DOCTYPE html>
-<style>
-  /* netnet default bg */
-  body {
-    margin: 0;
-    background-image: linear-gradient(#515199a8 2px, transparent 1px),
-      linear-gradient(90deg, #515199a8 2px, transparent 1px);
-    background-size: 50px 50px;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-  }
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scarlett Sandy | Projects</title>
 
-  body::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(0deg, #c76ebca8, #515199a8);
-  }
-</style>
-    
+  <style>
+    :root{
+      --cream:#efe6da;
+      --cream-dark:#d8cec1;
+      --rose:#c8b0aa;
+      --cherry:#6d0f18;
+      --cherry-deep:#4a0910;
+      --wine:#260306;
+      --text-dark:#2b0a0d;
+      --white:#fffaf7;
+      --overlay:rgba(0,0,0,0.52);
+      --line:rgba(109,15,24,0.15);
+      --shadow:0 18px 40px rgba(38,3,6,0.18);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      min-height:100vh;
+      color:var(--text-dark);
+      background:
+        linear-gradient(180deg, rgba(239,230,218,0.78) 0%, rgba(214,197,190,0.66) 28%, rgba(122,24,35,0.50) 68%, rgba(38,3,6,0.78) 100%),
+        url("Silk.jpg") center/cover fixed;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.24), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(109,15,24,0.22), transparent 32%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    img{
+      display:block;
+      max-width:100%;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .display{
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing:0.04em;
+    }
+
+    .page{
+      position:relative;
+      z-index:1;
+      width:min(1250px, 92vw);
+      margin:0 auto;
+      padding:34px 0 70px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:30px;
+      color:var(--cherry-deep);
+    }
+
+    .brand{
+      font-size:0.95rem;
+      text-transform:uppercase;
+      letter-spacing:0.22em;
+      font-weight:700;
+    }
+
+    .nav{
+      display:flex;
+      gap:22px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      font-size:0.92rem;
+      text-transform:uppercase;
+      letter-spacing:0.14em;
+      padding-bottom:4px;
+      border-bottom:1px solid rgba(74,9,16,0.25);
+      transition:0.25s ease;
+    }
+
+    .nav a:hover{
+      color:var(--cherry);
+      border-color:var(--cherry);
+    }
+
+    .hero{
+      text-align:center;
+      margin-bottom:38px;
+      padding:20px 0 8px;
+    }
+
+    .hero h1{
+      font-size:clamp(3.2rem, 8vw, 6.6rem);
+      color:var(--cherry-deep);
+      line-height:0.95;
+      text-transform:uppercase;
+      margin-bottom:12px;
+      text-shadow:0 2px 10px rgba(255,255,255,0.2);
+    }
+
+    .hero p{
+      max-width:700px;
+      margin:0 auto;
+      color:#5e2328;
+      line-height:1.8;
+      font-size:1rem;
+    }
+
+    .section-line{
+      width:min(760px, 100%);
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(74,9,16,0.24), transparent);
+      margin:22px auto 0;
+    }
+
+    .projects-wrap{
+      margin-top:42px;
+      padding:28px 0 10px;
+    }
+
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(220px, 1fr));
+      gap:34px 26px;
+      justify-items:center;
+    }
+
+    .project-card{
+      width:100%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .project-circle{
+      width:min(280px, 100%);
+      aspect-ratio:1 / 1;
+      border-radius:50%;
+      position:relative;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      background:rgba(255,255,255,0.28);
+      border:1px solid rgba(109,15,24,0.14);
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+      isolation:isolate;
+    }
+
+    .project-circle:hover{
+      transform:translateY(-8px) scale(1.02);
+      box-shadow:0 28px 54px rgba(38,3,6,0.28);
+    }
+
+    .project-circle img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform 0.45s ease, filter 0.45s ease;
+      filter:saturate(0.92) contrast(0.98);
+    }
+
+    .project-circle:hover img{
+      transform:scale(1.08);
+      filter:saturate(1) contrast(1);
+    }
+
+    .project-overlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:24px;
+      background:linear-gradient(180deg, rgba(0,0,0,0.18), var(--overlay));
+      color:var(--white);
+      opacity:0;
+      transition:opacity 0.35s ease;
+      z-index:2;
+    }
+
+    .project-circle:hover .project-overlay{
+      opacity:1;
+    }
+
+    .project-overlay h3{
+      font-family: Georgia, "Times New Roman", serif;
+      font-size:1.45rem;
+      line-height:1.1;
+      text-transform:uppercase;
+      margin-bottom:10px;
+      letter-spacing:0.05em;
+    }
+
+    .project-overlay p{
+      font-size:0.95rem;
+      line-height:1.6;
+      max-width:190px;
+      color:rgba(255,250,247,0.9);
+    }
+
+    .placeholder{
+      background:
+        radial-gradient(circle at top left, rgba(109,15,24,0.18), transparent 36%),
+        linear-gradient(180deg, rgba(255,255,255,0.55), rgba(109,15,24,0.16));
+      position:relative;
+    }
+
+    .placeholder::before{
+      content:"+";
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:4.6rem;
+      font-weight:300;
+      color:rgba(74,9,16,0.52);
+      z-index:1;
+    }
+
+    .placeholder-label{
+      position:absolute;
+      inset:auto 0 28px 0;
+      text-align:center;
+      z-index:2;
+      color:rgba(74,9,16,0.72);
+      font-size:0.84rem;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      font-weight:700;
+    }
+
+    .footer-note{
+      text-align:center;
+      margin-top:44px;
+      color:rgba(255,250,247,0.75);
+      font-size:0.92rem;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+    }
+
+    @media (max-width: 980px){
+      .projects-grid{
+        grid-template-columns:repeat(2, minmax(220px, 1fr));
+      }
+    }
+
+    @media (max-width: 640px){
+      .page{
+        padding-top:24px;
+      }
+
+      .topbar{
+        flex-direction:column;
+        gap:16px;
+      }
+
+      .projects-grid{
+        grid-template-columns:1fr;
+        gap:24px;
+      }
+
+      .project-circle{
+        width:min(290px, 88vw);
+      }
+
+      .hero h1{
+        font-size:clamp(2.6rem, 13vw, 4.4rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">Scarlett Sandy</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1 class="display">Projects</h1>
+      <p>
+        A curated collection of visual, editorial, and story-driven work. Hover over each project
+        to explore the concept behind it.
+      </p>
+      <div class="section-line"></div>
+    </section>
+
+    <section class="projects-wrap">
+      <div class="projects-grid">
+
+        <a class="project-card" href="https://scrlettsandy.github.io/project1/" target="_blank">
+          <div class="project-circle">
+            <img src="1.png" alt="Curated Frames preview">
+            <div class="project-overlay">
+              <h3>Curated Frames</h3>
+              <p>Film-focused editorial website with cinematic visuals and organized browsing.</p>
+            </div>
+          </div>
+        </a>
+
+        <a class="project-card" href="https://scrlettsandy.github.io/prodject2/" target="_blank">
+          <div class="project-circle">
+            <img src="4.jpg" alt="Good Design preview">
+            <div class="project-overlay">
+              <h3>Good Design</h3>
+              <p>Editorial magazine project exploring texture, typography, and visual identity.</p>
+            </div>
+          </div>
+        </a>
+
+        <a class="project-card" href="https://scrlettsandy.github.io/prodject3/" target="_blank">
+          <div class="project-circle">
+            <img src="8.png" alt="Princess Cafe preview">
+            <div class="project-overlay">
+              <h3>Princess Cafe</h3>
+              <p>Silent short film centered on atmosphere, observation, and visual storytelling.</p>
+            </div>
+          </div>
+        </a>
+
+        <div class="project-card">
+          <div class="project-circle placeholder">
+            <div class="placeholder-label">Future Project</div>
+            <div class="project-overlay">
+              <h3>Coming Soon</h3>
+              <p>Space reserved for a future portfolio piece.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-circle placeholder">
+            <div class="placeholder-label">Future Project</div>
+            <div class="project-overlay">
+              <h3>Coming Soon</h3>
+              <p>Space reserved for a future portfolio piece.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-circle placeholder">
+            <div class="placeholder-label">Future Project</div>
+            <div class="project-overlay">
+              <h3>Coming Soon</h3>
+              <p>Space reserved for a future portfolio piece.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="footer-note">More work coming soon</div>
+  </main>
+</body>
+</html>
