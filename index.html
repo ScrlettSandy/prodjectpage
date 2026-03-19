@@ -258,6 +258,66 @@
       font-weight:700;
     }
 
+    .audio-doc-visual{
+      background:
+        radial-gradient(circle at top left, rgba(109,15,24,0.28), transparent 38%),
+        linear-gradient(180deg, rgba(255,255,255,0.55), rgba(109,15,24,0.18));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .audio-doc-label{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:1;
+      color:rgba(74,9,16,0.82);
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:1.8rem;
+      line-height:1.1;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+      text-align:center;
+      padding:30px;
+    }
+
+    .audio-doc-wave{
+      position:absolute;
+      inset:auto 18% 22% 18%;
+      height:52px;
+      display:grid;
+      grid-template-columns:repeat(14, 1fr);
+      gap:6px;
+      align-items:end;
+      z-index:1;
+      opacity:0.65;
+    }
+
+    .audio-doc-wave span{
+      display:block;
+      width:100%;
+      border-radius:999px;
+      background:linear-gradient(180deg, rgba(74,9,16,0.9), rgba(109,15,24,0.55));
+    }
+
+    .audio-doc-wave span:nth-child(1){height:18px}
+    .audio-doc-wave span:nth-child(2){height:34px}
+    .audio-doc-wave span:nth-child(3){height:24px}
+    .audio-doc-wave span:nth-child(4){height:42px}
+    .audio-doc-wave span:nth-child(5){height:28px}
+    .audio-doc-wave span:nth-child(6){height:46px}
+    .audio-doc-wave span:nth-child(7){height:36px}
+    .audio-doc-wave span:nth-child(8){height:20px}
+    .audio-doc-wave span:nth-child(9){height:40px}
+    .audio-doc-wave span:nth-child(10){height:30px}
+    .audio-doc-wave span:nth-child(11){height:44px}
+    .audio-doc-wave span:nth-child(12){height:26px}
+    .audio-doc-wave span:nth-child(13){height:38px}
+    .audio-doc-wave span:nth-child(14){height:22px}
+
     .footer-note{
       text-align:center;
       margin-top:44px;
@@ -361,15 +421,19 @@
           </div>
         </a>
 
-        <div class="project-card">
-          <div class="project-circle placeholder">
-            <div class="placeholder-label">Future Project</div>
+        <a class="project-card" href="https://scrlettsandy.github.io/project5/" target="_blank">
+          <div class="project-circle audio-doc-visual">
+            <div class="audio-doc-label">Audio Doc</div>
+            <div class="audio-doc-wave">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
             <div class="project-overlay">
-              <h3>Coming Soon</h3>
-              <p>Space reserved for a future portfolio piece.</p>
+              <h3>Audio Doc</h3>
+              <p>Audio documentary project focused on storytelling, pacing, atmosphere, and sound alone.</p>
             </div>
           </div>
-        </div>
+        </a>
 
         <div class="project-card">
           <div class="project-circle placeholder">
